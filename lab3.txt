@@ -1,0 +1,60 @@
+// ===========================================================
+// ===========================================================
+
+The table below depicts the requirements for a business consultancy working on local and international projects. 
+
+Emp-No	| Emp-Name 	| Dept	        | Dept Manager 	| Proj-id	 | Proj-Start-Date 	      | Location	                    | Weeks-on-Project 
+005	    | Smith 	| Marketing	    | Jones 	    | (A, B, C)  | (12-93, 06-94, 09-94)  | (Poole, Plymouth, Portsmouth)	| (11, 15, 6)
+007	    | Bond 	    | Accounts	    | Bloggs 	    | (B, D)	 | (06-94, 06-94)	      | (Plymouth, Berlin)	            | (3, 9)
+009	    | King 	    | Info Systems	| Hurne 	    | C	         | 09-94 	              | Portsmouth	                    | 10 
+010	    | Holt 	    | Accounts	    | Bloggs 	    | (A, B, D)  | (12-93, 06-94, 06-94)  | (Poole, Belfast, Hamburg)	    | (21, 10, 12)
+
+
+1- Emp.no is the primary key. 
+2- Employees work on a number of projects concurrently. 
+3- Weeks-on-project represents the number of weeks that an employee has spent on a particular. 
+4- The employee number, emp-no, and the project identifier, project-id, are unique identifiers. 
+5- The department manager, manager, is the name of the current manager, i.e., there can be only one manager per department. 
+6- A project can take place in several locations (i.e Employees can work on a project from their location). 
+7- You are required to show the first, second and third normal forms. 
+
+
+
+
+0 NF
+company(#'Emp-No', Emp-Name, Dept, Dept-Manager, ('Proj-id'), (Proj-Start-Date), (Location), (Weeks-on-Project))
+
+
+
+1st Normal Form: [composite attributes, multi-valued, repeating group]
+company(#'Emp-No', Emp-Name, Dept, Dept-Manager)
+Project(#*'Emp-No', #('Proj-id'), (Proj-Start-Date), (Location), (Weeks-on-Project))
+
+
+
+2nd Normal Form: [1st NF + Partial Dependency] => comosite key
+company(#'Emp-No', Emp-Name, Dept, Dept-Manager)
+info_proj(#('Proj-id'), (Proj-Start-Date))
+Project(#*'Emp-No', #*('Proj-id'), (Location), (Weeks-on-Project))
+
+
+
+3rd Normal Form: [2nd NF + Transitive Dependency] => none key attributes
+De_Mang(#Dept, Dept-Manager)
+company(#'Emp-No', Emp-Name, *Dept)
+info_proj(#('Proj-id'), (Proj-Start-Date))
+Project(#*'Emp-No', #*('Proj-id'), (Location), (Weeks-on-Project))
+
+
+
+
+
+
+
+
+
+
+
+
+// ===========================================================
+// ===========================================================
